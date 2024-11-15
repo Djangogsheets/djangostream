@@ -14,25 +14,8 @@ if os.path.exists(file):
 
     # Display the title
     st.title("POS Report")
-    
-    # Create filters for each column
-    for column in df.columns:
-        if df[column].dtype == 'object':  # For string columns
-            unique_values = df[column].unique()
-            selected_values = st.multiselect(f"Filter by {column}", options=unique_values, default=unique_values)
-            if selected_values:
-                df = df[df[column].isin(selected_values)]
-        elif df[column].dtype == 'number':  # For numeric columns
-            min_value = float(df[column].min())
-            max_value = float(df[column].max())
-            selected_range = st.slider(f"Select range for {column}", min_value=min_value, max_value=max_value, value=(min_value, max_value))
-            df = df[(df[column] >= selected_range[0]) & (df[column] <= selected_range[1])]
-        elif df[column].dtype == 'datetime64[ns]':  # For date columns
-            unique_dates = df[column].dt.date.unique()  # Get unique dates
-            selected_date = st.selectbox(f"Select date for {column}", options=unique_dates)
-            df = df[df[column].dt.date == selected_date]  # Filter by selected date
 
-    # Display the filtered DataFrame
+    # Display the DataFrame without any filters
     st.dataframe(df)
 
 else:
