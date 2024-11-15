@@ -13,3 +13,4 @@ st.write("Here's the data for the POS:")
 
 # Display the data
 st.dataframe(data)
+#st.tabulator(data)
