@@ -4,7 +4,7 @@ import streamlit.components.v1 as components
 import os
 
 # Set up the Streamlit page configuration
-st.set_page_config(page_icon="🌴", page_title="POS Report", layout="wide")
+st.set_page_config(page_icon=" ", page_title="POS Report", layout="wide")
 
 # Load the default CSV file
 file = '123.csv'
@@ -27,29 +27,31 @@ if os.path.exists(file):
             column_setting.append(f"""{{"title":"{col}", "field":"{col}", "width":200, "sorter":"string", "hozAlign":"center", "headerFilter":"input", "editor": "input"}}""")
 
         # custom max min filter function
-        var minMaxFilterFunction = function(headerValue, rowValue, rowData, filterParams){
+        
+        function minMaxFilterFunction(headerValue, rowValue, rowData, filterParams) {
             //headerValue - the value of the header filter element
             //rowValue - the value of the column in this row
             //rowData - the data for the row being filtered
             //filterParams - params object passed to the headerFilterFuncParams property
 
-            if(rowValue){
-                if(headerValue.start != ""){
-                    if(headerValue.end != ""){
+            if (rowValue) {
+                if (headerValue.start != "") {
+                    if (headerValue.end != "") {
                         return rowValue >= headerValue.start && rowValue <= headerValue.end;
-                    }else{
+                    } else {
                         return rowValue >= headerValue.start;
                     }
-                }else{
-                    if(headerValue.end != ""){
+                } else {
+                    if (headerValue.end != "") {
                         return rowValue <= headerValue.end;
                     }
                 }
             }
             return true; //must return a boolean, true if it passes the filter.
         }
-
+        
         # custom max min header filter
+        
         var minMaxFilterEditor = function(cell, onRendered, success, cancel, editorParams){
             var end;
             var container = document.createElement("span");
@@ -97,6 +99,7 @@ if os.path.exists(file):
 
             return container;
         }
+        
 
         components.html(f"""
         <!DOCTYPE html>
@@ -139,5 +142,4 @@ if os.path.exists(file):
 else:
     st.title("Error")
     st.write(f"The file '{file}' does not exist. Please ensure it is located in the correct directory.")
-
 
