@@ -42,9 +42,6 @@ if os.path.exists(file):
             <script type="text/javascript" src="https://unpkg.com/tabulator-tables@4.8.1/dist/js/tabulator.min.js"></script>
         </head>
         <body>
-            <div style="margin-left:30%;">
-                {''.join(column_selection)}
-            </div>
             <div id="example-table"></div>
             <script type="text/javascript">
                 var tabledata = {table_data};
