@@ -13,9 +13,10 @@ file = '123.csv'
 if os.path.exists(file):
     df = pd.read_csv(file, encoding="gbk")
 
-    # Convert 'date_creation' to datetime if it exists
-    if 'date_creation' in df.columns:
-        df['date_creation'] = pd.to_datetime(df['date_creation'], errors='coerce')
+    # Convert 'POS_date' to datetime if it exists
+    if 'POS_date' in df.columns:
+        df['POS_date'] = pd.to_datetime(df['POS_date'], errors='coerce')
+        # Convert 'date_creation' to datetime if it exists
 
     # Debug: Display the DataFrame
     st.write("Data loaded successfully:")
@@ -33,7 +34,8 @@ if os.path.exists(file):
         column_setting = []
         column_setting.append("""{rowHandle:true, formatter:"handle", headerSort:false, frozen:true, width:30, minWidth:30}""")
         for col in columns:
-            if col == 'date_creation':
+            if col == 'POS_date':
+                if col == 'date_creation':
                 column_setting.append(f"""{{"title":"{col}", "field":"{col}", "width":200, "sorter":"date", "hozAlign":"center", "headerFilter":"input", "editor": "input"}}""")
             else:
                 column_setting.append(f"""{{"title":"{col}", "field":"{col}", "width":200, "sorter":"string", "hozAlign":"center", "headerFilter":"input", "editor": "input"}}""")
