@@ -14,7 +14,7 @@ if os.path.exists(file):
     df = pd.read_csv(file, encoding="gbk")
 
     # Debug: Display the DataFrame
-    ST.TITLE("POS Report")
+    st.title("POS Report")
     # st.write("POS Report loaded successfully:") 
     st.dataframe(df)
 
