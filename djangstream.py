@@ -20,6 +20,7 @@ if os.path.exists(file):
     # Draw the table
     def draw_table(df, height, width):
         columns = df.columns
+        table_data = df.to_dict(orient="records")
         column_setting = []
         column_setting.append("""{rowHandle:true, formatter:"handle", headerSort:false, frozen:true, width:30, minWidth:30}""")
         for col in columns:
@@ -63,3 +64,4 @@ if os.path.exists(file):
 else:
     st.title("Error")
     st.write(f"The file '{file}' does not exist. Please ensure it is located in the correct directory.")
+

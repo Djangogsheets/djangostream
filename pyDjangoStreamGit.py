@@ -11,7 +11,6 @@ def run_git_commands(repo_path):
 
     try:
         # Add all changes
-        table_data = None
         subprocess.run(["git", "add", "."], check=True)
         print("Added changes to staging.")
 
