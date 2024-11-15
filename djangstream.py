@@ -80,9 +80,9 @@ if os.path.exists(file):
                 document.getElementById("filter-date").addEventListener("change", function() {{
                     var dateValue = this.value;
                     if (dateValue) {{
-                        table.setFilter("date_creation", "=", dateValue);
+                        table.setFilter("POS_date", "=", dateValue);
                     }} else {{
-                        table.clearFilter("date_creation");
+                        table.clearFilter("POS_date");
                     }}
                 }});
             </script>
