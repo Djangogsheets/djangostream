@@ -1,14 +1,21 @@
 import streamlit as st
 import pandas as pd
 import streamlit.components.v1 as components
+import os
 
 # Set up the Streamlit page configuration
 st.set_page_config(page_icon="🌴", page_title="POS Report", layout="wide")
+
 # Load the default CSV file
 file = '123.csv'
 
-if file is not None:
+# Check if the file exists
+if os.path.exists(file):
     df = pd.read_csv(file, encoding="gbk")
+
+    # Debug: Display the DataFrame
+    st.write("Data loaded successfully:")
+    st.dataframe(df)
 
     def draw_table(df, height, width):
         columns = df.columns
@@ -37,8 +44,8 @@ if file is not None:
         <body>
             <div style="margin-left:30%;">
                 {''.join(column_selection)}
-                <input id="filter-value" type="text" placeholder="enter what to filter" style="font-size:15px;border-color:grey;border-radius:5%">
-                <button id="filter-clear" style="font-size:15px;background:#00ccff;color:white;border-radius:15%;border-color:white;">clear filter</button>
+                <input id="filter-value" type="text" placeholder="Enter what to filter" style="font-size:15px;border-color:grey;border-radius:5%">
+                <button id="filter-clear" style="font-size:15px;background:#00ccff;color:white;border-radius:15%;border-color:white;">Clear filter</button>
             </div>
             <div id="example-table"></div>
             <script type="text/javascript">
@@ -66,13 +73,5 @@ if file is not None:
     draw_table(df, 500, 1200)
 
 else:
-    # Load the default CSV file if no file is uploaded
-    csv_file_path = '123.csv'
-    data = pd.read_csv(csv_file_path)
-
-    # Streamlit app
-    #st.title("TYRES POS report ")
-    st.write("Here's the data for the POS:")
-
-    # Display the data
-    st.dataframe(data)
+    st.title("Error")
+    st.write(f"The file '{file}' does not exist. Please ensure it is located in the correct directory.")
