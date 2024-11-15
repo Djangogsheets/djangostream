@@ -32,7 +32,7 @@ if os.path.exists(file):
 
         table_data = df.to_dict(orient="records")
         column_setting = []
-        column_setting.append("""{rowHandle:true, formatter:"handle", headerSort:false, frozen:true, width:30, minWidth:30}""")
+            column_setting.append("""{rowHandle:true, formatter:"handle", headerSort:false, frozen:true, width:30, minWidth:30}""")
         for col in columns:
             if col == 'POS_date':
                 if col == 'date_creation':
