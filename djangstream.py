@@ -56,8 +56,7 @@ if os.path.exists(file):
                     pagination: "local",
                     paginationSize: 5,
                     tooltips: true,
-                    columns: [{', '.join(column_setting)},
-                    {title: 'cash', field: 'cash', width: 200, sorter: 'string', hozAlign: 'center', headerFilter: 'input', editor: 'input'},],
+                    columns: [{', '.join(column_setting)}],
                     
                 }});
             </script>
