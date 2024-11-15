@@ -1,7 +1,13 @@
 import streamlit as st
+import pandas as pd
 
-# Set the title of the app
-st.title("Welcome to My Streamlit App")
+# Load the CSV file
+csv_file_path = '123.csv'  # Adjust the path if necessary
+data = pd.read_csv(csv_file_path)
 
-# Display a greeting
-st.write("Hi!")
+# Streamlit app
+st.title("My Streamlit App with CSV Data")
+st.write("Here's the data from the CSV file:")
+
+# Display the data
+st.dataframe(data)
