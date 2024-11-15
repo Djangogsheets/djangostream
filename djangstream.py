@@ -54,9 +54,8 @@ if os.path.exists(file):
                     pagination: "local",
                     paginationSize: 5,
                     tooltips: true,
-                    # columns: [{', '.join(column_setting)}],
                     columns: [
-                        {title: "reference", field: "ref", width: 200, sorter: "string", hozAlign: "center", headerFilter: "input", editor: "input"},
+                        {title: "ref", field: "ref", width: 200, sorter: "string", hozAlign: "center", headerFilter: "input", editor: "input"},
                         {title: "opening", field: "open", width: 200, sorter: "string", hozAlign: "center", headerFilter: "input", editor: "input"},
                         {title: "cash", field: "cash", width: 200, sorter: "string", hozAlign: "center", headerFilter: "input", editor: "input", topCalc: "sum"},
                         {title: "card", field: "card", width: 200, sorter: "string", hozAlign: "center", headerFilter: "input", editor: "input", topCalc: "sum"},                            
