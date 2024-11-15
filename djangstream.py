@@ -56,6 +56,7 @@ if os.path.exists(file):
                     paginationSize: 5,
                     tooltips: true,
                     columns: [
+                        {title: "rowid", field: "rowid", width: 200, sorter: "string", hozAlign: "center", headerFilter: "input", editor: "input"},
                         {title: "ref", field: "ref", width: 200, sorter: "string", hozAlign: "center", headerFilter: "input", editor: "input"},
                         {title: "opening", field: "open", width: 200, sorter: "string", hozAlign: "center", headerFilter: "input", editor: "input"},
                         {title: "cash", field: "cash", width: 200, sorter: "string", hozAlign: "center", headerFilter: "input", editor: "input", topCalc: "sum"},
