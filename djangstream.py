@@ -4,7 +4,7 @@ import pandas as pd
 #print("Current working directory:", os.getcwd())
 
 # Load the CSV file
-csv_file_path = r'C:\JVCODE\DjangoGithub\djangostream\123.csv'
+csv_file_path = '123.csv'
 data = pd.read_csv(csv_file_path)
 
 # Streamlit app
