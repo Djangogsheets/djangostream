@@ -1,13 +1,15 @@
 import streamlit as st
 import pandas as pd
+#import os
+#print("Current working directory:", os.getcwd())
 
 # Load the CSV file
-csv_file_path = '123.csv'  # Adjust the path if necessary
+csv_file_path = r'C:\JVCODE\DjangoGithub\djangostream\123.csv'
 data = pd.read_csv(csv_file_path)
 
 # Streamlit app
-st.title("My Streamlit App with CSV Data")
-st.write("Here's the data from the CSV file:")
+st.title("TYRES 123 POS report ")
+st.write("Here's the data for the POS:")
 
 # Display the data
 st.dataframe(data)
