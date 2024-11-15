@@ -6,7 +6,7 @@ import streamlit.components.v1 as components
 # st.set_page_config(page_icon="🌴", page_title="POS", layout="wide")
 # Upload CSV file
 # file = st.file_uploader("POS", type=["csv"])
-file = r'C:\JVCODE\DjangoGithub\djangostream\123.csv'
+file = '123.csv'
 if file is not None:
     df = pd.read_csv(file, encoding="gbk")
 
