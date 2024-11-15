@@ -29,8 +29,17 @@ if os.path.exists(file):
     # Filter the DataFrame based on the selected date
     filtered_df = df[df['POS_date'].dt.date == selected_date]
 
+    # Calculate totals for cash and card
+    total_cash = filtered_df['cash'].sum() if 'cash' in filtered_df.columns else 0
+    total_card = filtered_df['card'].sum() if 'card' in filtered_df.columns else 0
+
     # Display the filtered DataFrame
     st.dataframe(filtered_df)
+
+    # Display the totals
+    st.subheader("Totals")
+    st.write(f"Total Cash: ${total_cash:.2f}")
+    st.write(f"Total Card: ${total_card:.2f}")
 
 else:
     st.title("Error")
