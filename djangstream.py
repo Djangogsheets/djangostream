@@ -44,8 +44,6 @@ if os.path.exists(file):
         <body>
             <div style="margin-left:30%;">
                 {''.join(column_selection)}
-                <input id="filter-value" type="text" placeholder="Enter what to filter" style="font-size:15px;border-color:grey;border-radius:5%">
-                <button id="filter-clear" style="font-size:15px;background:#00ccff;color:white;border-radius:15%;border-color:white;">Clear filter</button>
             </div>
             <div id="example-table"></div>
             <script type="text/javascript">
@@ -60,10 +58,7 @@ if os.path.exists(file):
                     paginationSize: 5,
                     tooltips: true,
                     columns: [{', '.join(column_setting)}],
-                }});
-
-                document.getElementById("filter-clear").addEventListener("click", function() {{
-                    table.clearFilter();
+               
                 }});
             </script>
         </body>
