@@ -61,7 +61,7 @@ if os.path.exists(file):
                     {title:card, field:card, width:200, sorter:"string", hozAlign:"center", headerFilter:"input", editor: "input", topCalc:"sum"},                            
                     {title:POS_date, field:date, width:200, sorter:"string", hozAlign:"center", headerFilter:"input", editor: "input"},
                     {title:POS_number, field:posnumber, width:200, sorter:"string", hozAlign:"center", headerFilter:"input", editor: "input"},      
-                    {title:fk_user_valid, field:user_valid, width:200, sorter:"string", hozAlign:"center", headerFilter:"input", editor: "input"},}}
+                    {title:fk_user_valid, field:user_valid, width:200, sorter:"string", hozAlign:"center", headerFilter:"input", editor: "input"},]
                 }});
             </script>
         </body>
