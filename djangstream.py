@@ -1,89 +1,78 @@
-import subprocess
-import datetime
-import os
-import pandas as pd
 import streamlit as st
+import pandas as pd
 import streamlit.components.v1 as components
 
-def run_git_commands(repo_path):
-    # Change to the specified repository directory
-    os.chdir(repo_path)
+# Set up the Streamlit page configuration
+st.set_page_config(page_icon="🌴", page_title="POS", layout="wide")
+# Upload CSV file
+file = st.file_uploader("POS", type=["csv"])
 
-    # Define the commit message with a timestamp
-    commit_message = f"csv changed and {datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')}"
+if file is not None:
+    df = pd.read_csv(file, encoding="gbk")
 
-    try:
-        # Add all changes
-        subprocess.run(["git", "add", "."], check=True)
-        print("Added changes to staging.")
+    def draw_table(df, height, width):
+        columns = df.columns
+        column_selection = []
+        column_selection.append("""<select id="filter-field" style="font-size:15px;background:white;color:black;border-radius:15%;border-color:grey;">""")
+        for col in columns:
+            column_selection.append(f"""<option value='{col}'>{col}</option>""")
+        column_selection.append("""</select>""")
 
-        # Commit changes
-        subprocess.run(["git", "commit", "-m", commit_message], check=True)
-        print(f"Committed changes with message: '{commit_message}'")
+        table_data = df.to_dict(orient="records")
+        column_setting = []
+        column_setting.append("""{rowHandle:true, formatter:"handle", headerSort:false, frozen:true, width:30, minWidth:30}""")
+        for col in columns:
+            column_setting.append(f"""{{"title":"{col}", "field":"{col}", "width":200, "sorter":"string", "hozAlign":"center", "headerFilter":"input", "editor": "input"}}""")
 
-        # Push to the main branch
-        subprocess.run(["git", "push", "origin", "main"], check=True)
-        print("Pushed changes to GitHub.")
+        components.html(f"""
+        <!DOCTYPE html>
+        <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Tabulator Example</title>
+            <link href="https://unpkg.com/tabulator-tables@4.8.1/dist/css/tabulator_modern.min.css" rel="stylesheet">
+            <script type="text/javascript" src="https://unpkg.com/tabulator-tables@4.8.1/dist/js/tabulator.min.js"></script>
+        </head>
+        <body>
+            <div style="margin-left:30%;">
+                {''.join(column_selection)}
+                <input id="filter-value" type="text" placeholder="填写要筛选的内容" style="font-size:15px;border-color:grey;border-radius:5%">
+                <button id="filter-clear" style="font-size:15px;background:#00ccff;color:white;border-radius:15%;border-color:white;">清除筛选</button>
+            </div>
+            <div id="example-table"></div>
+            <script type="text/javascript">
+                var tabledata = {table_data};
+                var table = new Tabulator("#example-table", {{
+                    height: {height},
+                    data: tabledata,
+                    layout: "fitDataTable",
+                    movableRows: true,
+                    resizableColumnFit: true,
+                    pagination: "local",
+                    paginationSize: 5,
+                    tooltips: true,
+                    columns: [{', '.join(column_setting)}],
+                }});
 
-    except subprocess.CalledProcessError as e:
-        print(f"An error occurred: {e}")
+                document.getElementById("filter-clear").addEventListener("click", function() {{
+                    table.clearFilter();
+                }});
+            </script>
+        </body>
+        </html>
+        """, height=height, width=width)
 
-def load_data_and_draw_table():
-    # Load the CSV file
-    csv_file_path = '123.csv'  # Adjust this path if needed
-    df = pd.read_csv(csv_file_path, encoding="gbk")
+    draw_table(df, 500, 1200)
 
-    # Calculate totals for cash and card
-    total_cash = df['cash'].sum() if 'cash' in df.columns else 0
-    total_card = df['card'].sum() if 'card' in df.columns else 0
+else:
+    # Load the default CSV file if no file is uploaded
+    csv_file_path = '123.csv'
+    data = pd.read_csv(csv_file_path)
 
-    # Display the totals above the table
-    st.write(f"**Total Cash: {total_cash}**")
-    st.write(f"**Total Card: {total_card}**")
+    # Streamlit app
+    st.title("TYRES POS report ")
+    st.write("Here's the data for the POS:")
 
-    # Draw the table
-    draw_table(df)
-
-def draw_table(df):
-    # Prepare data for the table
-    table_data = df.to_dict(orient="records")
-    columns = df.columns.tolist()
-
-    column_setting = []
-    for col in columns:
-        column_setting.append(f"""{{"title":"{col}", "field":"{col}", "width":200, "sortable":true}}""")
-
-    components.html(f"""
-    <!DOCTYPE html>
-    <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Tabulator Example</title>
-        <link href="https://unpkg.com/tabulator-tables@4.8.1/dist/css/tabulator_modern.min.css" rel="stylesheet">
-        <script type="text/javascript" src="https://unpkg.com/tabulator-tables@4.8.1/dist/js/tabulator.min.js"></script>
-    </head>
-    <body>
-        <div id="example-table"></div>
-        <script type="text/javascript">
-            var tabledata = {table_data};
-            var table = new Tabulator("#example-table", {{
-                height: "400px",
-                data: tabledata,
-                layout: "fitDataTable",
-                pagination: "local",
-                paginationSize: 5,
-                columns: [{', '.join(column_setting)}],
-            }});
-        </script>
-    </body>
-    </html>
-    """, height=500)
-
-if __name__ == "__main__":
-    # Specify the path to your Git repository
-    repository_path = r"C:\JVCODE\DjangoGithub\djangostream"  # Use raw string for Windows path
-    run_git_commands(repository_path)
-
-    # Load data and draw table
-    load_data_and_draw_table()
+    # Display the data
+    st.dataframe(data)
