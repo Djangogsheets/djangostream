@@ -28,10 +28,9 @@ if os.path.exists(file):
             selected_range = st.slider(f"Select range for {column}", min_value=min_value, max_value=max_value, value=(min_value, max_value))
             df = df[(df[column] >= selected_range[0]) & (df[column] <= selected_range[1])]
         elif df[column].dtype == 'datetime64[ns]':  # For date columns
-            start_date = df[column].min().date()
-            end_date = df[column].max().date()
-            selected_dates = st.date_input(f"Select date range for {column}", [start_date, end_date])
-            df = df[(df[column] >= pd.to_datetime(selected_dates[0])) & (df[column] <= pd.to_datetime(selected_dates[1]))]
+            unique_dates = df[column].dt.date.unique()  # Get unique dates
+            selected_date = st.selectbox(f"Select date for {column}", options=unique_dates)
+            df = df[df[column].dt.date == selected_date]  # Filter by selected date
 
     # Display the filtered DataFrame
     st.dataframe(df)
