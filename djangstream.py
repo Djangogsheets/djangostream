@@ -1,16 +1,17 @@
 import streamlit as st
 import pandas as pd
 import streamlit.components.v1 as components
+import os
 
 # Set up the Streamlit page configuration
-#st.set_page_config(page_icon="🌴", page_title="Tabulator表格", layout="wide")
+# st.set_page_config(page_icon="🌴", page_title="Tabulator表格", layout="wide")
 
-# Upload CSV file
-#file = st.file_uploader("请上传文件", type=["csv"])
-file = '123.csv'
+# Try to load the CSV file; if not found, use a default file
+csv_file_path = '123.csv'  # Adjust this path if needed
 
-if file is not None:
-    df = pd.read_csv(file, encoding="gbk")
+# Check if the file exists
+if os.path.exists(csv_file_path):
+    df = pd.read_csv(csv_file_path, encoding="gbk")
 
     # Calculate totals for cash and card
     total_cash = df['cash'].sum() if 'cash' in df.columns else 0
@@ -90,13 +91,6 @@ if file is not None:
     draw_table(df, 500, 1200)
 
 else:
-    # Load the default CSV file if no file is uploaded
-    csv_file_path = '123.csv'
-    data = pd.read_csv(csv_file_path)
-
-    # Streamlit app
-    st.title("TYRES  POS report ")
-    st.write("Here's the data for the POS:")
-
-    # Display the data
-    st.dataframe(data)
+    # If the file does not exist, display an error message
+    st.title("错误")
+    st.write("默认文件 '123.csv' 不存在。请确保文件在正确的路径中。")
