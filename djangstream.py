@@ -20,7 +20,7 @@ if os.path.exists(file):
     def draw_table(df, height, width):
         columns = df.columns
         column_selection = []
-        column_selection.append("""<select id="filter-field" style="font-size:15px;background:white;color:black;border-radius:15%;border-color:grey;">""")
+        # column_selection.append("""<select id="filter-field" style="font-size:15px;background:white;color:black;border-radius:15%;border-color:grey;">""")
         for col in columns:
             column_selection.append(f"""<option value='{col}'>{col}</option>""")
         column_selection.append("""</select>""")
