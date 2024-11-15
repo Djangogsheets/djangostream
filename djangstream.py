@@ -12,11 +12,22 @@ file = '123.csv'
 if os.path.exists(file):
     df = pd.read_csv(file, encoding="gbk")
 
+    # Ensure 'POS_date' is in datetime format
+    if 'POS_date' in df.columns:
+        df['POS_date'] = pd.to_datetime(df['POS_date'])
+
     # Display the title
     st.title("POS Report")
 
-    # Display the DataFrame without any filters
-    st.dataframe(df)
+    # Create a dropdown to filter by POS_date
+    unique_dates = df['POS_date'].dt.date.unique()  # Get unique dates
+    selected_date = st.selectbox("Select POS_date", options=unique_dates)
+
+    # Filter the DataFrame based on the selected date
+    filtered_df = df[df['POS_date'].dt.date == selected_date]
+
+    # Display the filtered DataFrame
+    st.dataframe(filtered_df)
 
 else:
     st.title("Error")
