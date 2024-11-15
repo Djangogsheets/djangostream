@@ -15,7 +15,7 @@ if os.path.exists(file):
 
     # Debug: Display the DataFrame
     st.title('POS Report')
-    st.write("Data loaded successfully:")
+    # st.write("Data loaded successfully:")
     st.dataframe(df)
 
     def draw_table(df, height, width):
@@ -56,7 +56,8 @@ if os.path.exists(file):
                     pagination: "local",
                     paginationSize: 5,
                     tooltips: true,
-                    columns: [{', '.join(column_setting)}],
+                    columns: [{', '.join(column_setting)},
+                    {title: 'cash', field: 'cash', width: 200, sorter: 'string', hozAlign: 'center', headerFilter: 'input', editor: 'input'},],
                     
                 }});
             </script>
