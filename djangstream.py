@@ -19,35 +19,28 @@ if os.path.exists(file):
     st.dataframe(df)
 
 
-    #//Define variables for input elements
-var fieldEl = document.getElementById("filter-field");
-var typeEl = document.getElementById("filter-type");
-var valueEl = document.getElementById("filter-value");
+    # Define variables for input elements
+    field_el = document.getElementById("filter-field")
+    type_el = document.getElementById("filter-type")
+    value_el = document.getElementById("filter-value")
+def custom_filter(data):
+    return data['car'] and data['rating'] < 3
 
-#//Custom filter example
-function customFilter(data){
-    return data.car && data.rating < 3;
-}
+def update_filter():
+  filter_val = field_el.options[field_el.selectedIndex].value
+  type_val = type_el.options[type_el.selectedIndex].value
 
-#//Trigger setFilter function with correct parameters
-function updateFilter(){
-  var filterVal = fieldEl.options[fieldEl.selectedIndex].value;
-  var typeVal = typeEl.options[typeEl.selectedIndex].value;
+  filter_func = custom_filter if filter_val == "function" else filter_val
 
-  var filter = filterVal == "function" ? customFilter : filterVal;
+  if filter_val == "function":
+      type_el.disabled = True
+      value_el.disabled = True
+  else:
+      type_el.disabled = False
+      value_el.disabled = False
 
-  if(filterVal == "function" ){
-    typeEl.disabled = true;
-    valueEl.disabled = true;
-  }else{
-    typeEl.disabled = false;
-    valueEl.disabled = false;
-  }
-
-  if(filterVal){
-    table.setFilter(filter,typeVal, valueEl.value);
-  }
-}
+  if filter_val:
+      table.setFilter(filter_func, type_val, value_el.value)
 
 #//Update filters on value change
 document.getElementById("filter-field").addEventListener("change", updateFilter);
@@ -56,12 +49,13 @@ document.getElementById("filter-value").addEventListener("keyup", updateFilter);
 
 #//Clear filters on "Clear Filters" button click
 document.getElementById("filter-clear").addEventListener("click", function(){
-  fieldEl.value = "";
-  typeEl.value = "=";
-  valueEl.value = "";
-
+  field_el.value = "";
+  type_el.value = "=";
+  value_el.value = "";
   table.clearFilter();
 });
+
+table.clearFilter();
 
 
 
