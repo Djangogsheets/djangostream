@@ -15,62 +15,11 @@ if os.path.exists(file):
 
     # Debug: Display the DataFrame
     st.title('POS Report')
-    # st.write("Data loaded successfully:")
     st.dataframe(df)
 
-
-    # Define variables for input elements
-    field_el = document.getElementById("filter-field")
-    type_el = document.getElementById("filter-type")
-    value_el = document.getElementById("filter-value")
-def custom_filter(data):
-    return data['car'] and data['rating'] < 3
-
-def update_filter():
-  filter_val = field_el.options[field_el.selectedIndex].value
-  type_val = type_el.options[type_el.selectedIndex].value
-
-  filter_func = custom_filter if filter_val == "function" else filter_val
-
-  if filter_val == "function":
-      type_el.disabled = True
-      value_el.disabled = True
-  else:
-      type_el.disabled = False
-      value_el.disabled = False
-
-  if filter_val:
-      table.setFilter(filter_func, type_val, value_el.value)
-
-#//Update filters on value change
-document.getElementById("filter-field").addEventListener("change", updateFilter);
-document.getElementById("filter-type").addEventListener("change", updateFilter);
-document.getElementById("filter-value").addEventListener("keyup", updateFilter);
-
-#//Clear filters on "Clear Filters" button click
-document.getElementById("filter-clear").addEventListener("click", function(){
-  field_el.value == "";
-  field_el.value == "";
-  value_el.value == "";
-  table.clearFilter();
-});
-
-table.clearFilter();
-
-
-
-
-
-
+    # Draw the table
     def draw_table(df, height, width):
         columns = df.columns
-        column_selection = []
-        # column_selection.append("""<select id="filter-field" style="font-size:15px;background:white;color:black;border-radius:15%;border-color:grey;">""")
-        for col in columns:
-            column_selection.append(f"""<option value='{col}'>{col}</option>""")
-        column_selection.append("""</select>""")
-
-        table_data = df.to_dict(orient="records")
         column_setting = []
         column_setting.append("""{rowHandle:true, formatter:"handle", headerSort:false, frozen:true, width:30, minWidth:30}""")
         for col in columns:
@@ -87,36 +36,8 @@ table.clearFilter();
             <script type="text/javascript" src="https://unpkg.com/tabulator-tables@4.8.1/dist/js/tabulator.min.js"></script>
         </head>
         <body>
-            <div>
-  <select id="filter-field">
-    <option></option>
-    <option value="ref">ref</option>
-    
-  </select>
-
-  <select id="filter-type">
-    <option value="=">=</option>
-    <option value="<"><</option>
-    <option value="<="><=</option>
-    <option value=">">></option>
-    <option value=">=">>=</option>
-    <option value="!=">!=</option>
-    <option value="like">like</option>
-  </select>
-
-  <input id="filter-value" type="text" placeholder="value to filter">
-
-  <button id="filter-clear">Clear Filter</button>
-</div>
-
-<div id="example-table"></div>
-
-
-
-
-
-
             <div id="example-table"></div>
+
             <script type="text/javascript">
                 var tabledata = {table_data};
                 var table = new Tabulator("#example-table", {{
