@@ -3,10 +3,10 @@ import pandas as pd
 import streamlit.components.v1 as components
 
 # Set up the Streamlit page configuration
-st.set_page_config(page_icon="🌴", page_title="Tabulator表格", layout="wide")
+#st.set_page_config(page_icon="🌴", page_title="Tabulator表格", layout="wide")
 
 # Upload CSV file
-file = st.file_uploader("请上传文件", type=["csv"])
+#file = st.file_uploader("请上传文件", type=["csv"])
 
 if file is not None:
     df = pd.read_csv(file, encoding="gbk")
@@ -94,7 +94,7 @@ else:
     data = pd.read_csv(csv_file_path)
 
     # Streamlit app
-    st.title("POS report ")
+    st.title("TYRES  POS report ")
     st.write("Here's the data for the POS:")
 
     # Display the data
