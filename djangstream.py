@@ -32,10 +32,9 @@ if os.path.exists(file):
 
         table_data = df.to_dict(orient="records")
         column_setting = []
-            column_setting.append("""{rowHandle:true, formatter:"handle", headerSort:false, frozen:true, width:30, minWidth:30}""")
+        column_setting.append("""{rowHandle:true, formatter:"handle", headerSort:false, frozen:true, width:30, minWidth:30}""")
         for col in columns:
-            if col == 'POS_date':
-                if col == 'date_creation':
+            if col == 'POS_date' or col == 'date_creation':
                 column_setting.append(f"""{{"title":"{col}", "field":"{col}", "width":200, "sorter":"date", "hozAlign":"center", "headerFilter":"input", "editor": "input"}}""")
             else:
                 column_setting.append(f"""{{"title":"{col}", "field":"{col}", "width":200, "sorter":"string", "hozAlign":"center", "headerFilter":"input", "editor": "input"}}""")
@@ -91,7 +90,6 @@ if os.path.exists(file):
         </body>
         </html>
         """, height=height, width=width)
-
     draw_table(df, 500, 1200)
 
 else:
