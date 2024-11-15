@@ -30,7 +30,8 @@ if os.path.exists(file):
         column_setting = []
         column_setting.append("""{rowHandle:true, formatter:"handle", headerSort:false, frozen:true, width:30, minWidth:30}""")
         for col in columns:
-            column_setting.append(f"""{{"title":"{col}", "field":"{col}", "width":200, "sorter":"string", "hozAlign":"center", "headerFilter":true, "headerFilterLiveFilter":true, "editor": "input"}}""")
+            # Enable header filters for all columns
+            column_setting.append(f"""{{"title":"{col}", "field":"{col}", "width":200, "sorter":"string", "hozAlign":"center", "headerFilter":"input", "headerFilterLiveFilter":true, "editor": "input"}}""")
 
         components.html(f"""
         <!DOCTYPE html>
@@ -57,8 +58,6 @@ if os.path.exists(file):
                     tooltips: true,
                     columns: [{', '.join(column_setting)}],
                 }});
-
-                
             </script>
         </body>
         </html>
