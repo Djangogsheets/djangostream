@@ -15,7 +15,7 @@ if os.path.exists(file):
 
     # Debug: Display the DataFrame
     st.title("POS Report")
-    # st.write("POS Report loaded successfully:") 
+    st.write("POS Report loaded successfully:") 
     st.dataframe(df)
 
     def draw_table(df, height, width):
@@ -30,7 +30,7 @@ if os.path.exists(file):
         column_setting = []
         column_setting.append("""{rowHandle:true, formatter:"handle", headerSort:false, frozen:true, width:30, minWidth:30}""")
         for col in columns:
-            column_setting.append(f"""{{"title":"{col}", "field":"{col}", "width":200, "sorter":"string", "hozAlign":"center", "headerFilter":"input", "editor": "input"}}""")
+            column_setting.append(f"""{{"title":"{col}", "field":"{col}", "width":200, "sorter":"string", "hozAlign":"center", "headerFilter":true, "headerFilterLiveFilter":true, "editor": "input"}}""")
 
         components.html(f"""
         <!DOCTYPE html>
