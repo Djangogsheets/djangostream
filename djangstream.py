@@ -37,8 +37,8 @@ if file is not None:
         <body>
             <div style="margin-left:30%;">
                 {''.join(column_selection)}
-                <input id="filter-value" type="text" placeholder="填写要筛选的内容" style="font-size:15px;border-color:grey;border-radius:5%">
-                <button id="filter-clear" style="font-size:15px;background:#00ccff;color:white;border-radius:15%;border-color:white;">清除筛选</button>
+                <input id="filter-value" type="text" placeholder="enter what to filter" style="font-size:15px;border-color:grey;border-radius:5%">
+                <button id="filter-clear" style="font-size:15px;background:#00ccff;color:white;border-radius:15%;border-color:white;">clear filter</button>
             </div>
             <div id="example-table"></div>
             <script type="text/javascript">
