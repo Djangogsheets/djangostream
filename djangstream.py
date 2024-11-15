@@ -3,10 +3,10 @@ import pandas as pd
 import streamlit.components.v1 as components
 
 # Set up the Streamlit page configuration
-# st.set_page_config(page_icon="🌴", page_title="POS", layout="wide")
+st.set_page_config(page_icon="🌴", page_title="POS", layout="wide")
 # Upload CSV file
-# file = st.file_uploader("POS", type=["csv"])
-file = '123.csv'
+file = st.file_uploader("POS", type=["csv"])
+# file = '123.csv'
 if file is not None:
     df = pd.read_csv(file, encoding="gbk")
 
