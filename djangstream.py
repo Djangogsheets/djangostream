@@ -50,6 +50,7 @@ if os.path.exists(file):
                     data: tabledata,
                     layout: "fitDataTable",
                     movableRows: true,
+                    movableColumns:true,
                     resizableColumnFit: true,
                     pagination: "local",
                     paginationSize: 5,
