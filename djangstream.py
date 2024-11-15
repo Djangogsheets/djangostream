@@ -13,6 +13,10 @@ file = '123.csv'
 if os.path.exists(file):
     df = pd.read_csv(file, encoding="gbk")
 
+    # Convert 'date_creation' to datetime if it exists
+    if 'date_creation' in df.columns:
+        df['date_creation'] = pd.to_datetime(df['date_creation'], errors='coerce')
+
     # Debug: Display the DataFrame
     st.write("Data loaded successfully:")
     st.dataframe(df)
@@ -29,7 +33,10 @@ if os.path.exists(file):
         column_setting = []
         column_setting.append("""{rowHandle:true, formatter:"handle", headerSort:false, frozen:true, width:30, minWidth:30}""")
         for col in columns:
-            column_setting.append(f"""{{"title":"{col}", "field":"{col}", "width":200, "sorter":"string", "hozAlign":"center", "headerFilter":"input", "editor": "input"}}""")
+            if col == 'date_creation':
+                column_setting.append(f"""{{"title":"{col}", "field":"{col}", "width":200, "sorter":"date", "hozAlign":"center", "headerFilter":"input", "editor": "input"}}""")
+            else:
+                column_setting.append(f"""{{"title":"{col}", "field":"{col}", "width":200, "sorter":"string", "hozAlign":"center", "headerFilter":"input", "editor": "input"}}""")
 
         components.html(f"""
         <!DOCTYPE html>
@@ -46,6 +53,9 @@ if os.path.exists(file):
                 {''.join(column_selection)}
                 <input id="filter-value" type="text" placeholder="Enter what to filter" style="font-size:15px;border-color:grey;border-radius:5%">
                 <button id="filter-clear" style="font-size:15px;background:#00ccff;color:white;border-radius:15%;border-color:white;">Clear filter</button>
+            </div>
+            <div style="margin-top: 10px;">
+                <input id="filter-date" type="date" style="font-size:15px;border-color:grey;border-radius:5%;">
             </div>
             <div id="example-table"></div>
             <script type="text/javascript">
@@ -64,6 +74,16 @@ if os.path.exists(file):
 
                 document.getElementById("filter-clear").addEventListener("click", function() {{
                     table.clearFilter();
+                }});
+
+                // Add event listener for date filter
+                document.getElementById("filter-date").addEventListener("change", function() {{
+                    var dateValue = this.value;
+                    if (dateValue) {{
+                        table.setFilter("date_creation", "=", dateValue);
+                    }} else {{
+                        table.clearFilter("date_creation");
+                    }}
                 }});
             </script>
         </body>
