@@ -43,6 +43,35 @@ if os.path.exists(file):
             <script type="text/javascript" src="https://unpkg.com/tabulator-tables@4.8.1/dist/js/tabulator.min.js"></script>
         </head>
         <body>
+            <div>
+  <select id="filter-field">
+    <option></option>
+    <option value="ref">ref</option>
+    
+  </select>
+
+  <select id="filter-type">
+    <option value="=">=</option>
+    <option value="<"><</option>
+    <option value="<="><=</option>
+    <option value=">">></option>
+    <option value=">=">>=</option>
+    <option value="!=">!=</option>
+    <option value="like">like</option>
+  </select>
+
+  <input id="filter-value" type="text" placeholder="value to filter">
+
+  <button id="filter-clear">Clear Filter</button>
+</div>
+
+<div id="example-table"></div>
+
+
+
+
+
+
             <div id="example-table"></div>
             <script type="text/javascript">
                 var tabledata = {table_data};
