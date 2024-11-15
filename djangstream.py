@@ -7,10 +7,10 @@ import streamlit.components.v1 as components
 
 # Upload CSV file
 #file = st.file_uploader("请上传文件", type=["csv"])
-csv_file_path = '123.csv'
+file = '123.csv'
 
 if file is not None:
-    df = pd.read_csv(csv_file_path, encoding="gbk")
+    df = pd.read_csv(file, encoding="gbk")
 
     # Calculate totals for cash and card
     total_cash = df['cash'].sum() if 'cash' in df.columns else 0
