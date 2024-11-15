@@ -50,7 +50,7 @@ document.getElementById("filter-value").addEventListener("keyup", updateFilter);
 #//Clear filters on "Clear Filters" button click
 document.getElementById("filter-clear").addEventListener("click", function(){
   field_el.value = "";
-  type_el.value = "=";
+  field_el.value = "";
   value_el.value = "";
   table.clearFilter();
 });
