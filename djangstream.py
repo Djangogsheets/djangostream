@@ -26,8 +26,40 @@ if os.path.exists(file):
         for col in columns:
             column_setting.append(f"""{{"title":"{col}", "field":"{col}", "width":200, "sorter":"string", "hozAlign":"center", "headerFilter":"input", "editor": "input"}}""")
 
-        # custom max min filter function
         
+
+        components.html(f"""
+        <!DOCTYPE html>
+        <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Tabulator Example</title>
+            <link href="https://unpkg.com/tabulator-tables@4.8.1/dist/css/tabulator_modern.min.css" rel="stylesheet">
+            <script type="text/javascript" src="https://unpkg.com/tabulator-tables@4.8.1/dist/js/tabulator.min.js"></script>
+        </head>
+        <body>
+            <div id="example-table"></div>
+
+            <script type="text/javascript">
+                var tabledata = {table_data};
+                var table = new Tabulator("#example-table", {{
+                    height: {height},
+                    data: tabledata,
+                    layout: "fitDataTable",
+                    movableRows: true,
+                    movableColumns:true,
+                    resizableColumnFit: true,
+                    pagination: "local",
+                    paginationSize: 5,
+                    tooltips: true,
+                    columns: [{', '.join(column_setting)}],
+                    
+                    headerFilterFunc:minMaxFilterFunction,
+                    headerFilterLiveFilter:false,
+                    headerFilterEditor:minMaxFilterEditor,
+                }});
+                        # custom max min filter function
         function minMaxFilterFunction(headerValue, rowValue, rowData, filterParams) {
             //headerValue - the value of the header filter element
             //rowValue - the value of the column in this row
@@ -99,39 +131,7 @@ if os.path.exists(file):
 
             return container;
         }
-        
 
-        components.html(f"""
-        <!DOCTYPE html>
-        <html lang="en">
-        <head>
-            <meta charset="UTF-8">
-            <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <title>Tabulator Example</title>
-            <link href="https://unpkg.com/tabulator-tables@4.8.1/dist/css/tabulator_modern.min.css" rel="stylesheet">
-            <script type="text/javascript" src="https://unpkg.com/tabulator-tables@4.8.1/dist/js/tabulator.min.js"></script>
-        </head>
-        <body>
-            <div id="example-table"></div>
-
-            <script type="text/javascript">
-                var tabledata = {table_data};
-                var table = new Tabulator("#example-table", {{
-                    height: {height},
-                    data: tabledata,
-                    layout: "fitDataTable",
-                    movableRows: true,
-                    movableColumns:true,
-                    resizableColumnFit: true,
-                    pagination: "local",
-                    paginationSize: 5,
-                    tooltips: true,
-                    columns: [{', '.join(column_setting)}],
-                    
-                    headerFilterFunc:minMaxFilterFunction,
-                    headerFilterLiveFilter:false,
-                    headerFilterEditor:minMaxFilterEditor,
-                }});
             </script>
         </body>
         </html>
