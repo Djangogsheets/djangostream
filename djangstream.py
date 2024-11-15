@@ -59,12 +59,10 @@ if os.path.exists(file):
                     headerFilterLiveFilter:false,
                     headerFilterEditor:minMaxFilterEditor,
                 }});
+                <script>
                         # custom max min filter function
         function minMaxFilterFunction(headerValue, rowValue, rowData, filterParams) {
-            //headerValue - the value of the header filter element
-            //rowValue - the value of the column in this row
-            //rowData - the data for the row being filtered
-            //filterParams - params object passed to the headerFilterFuncParams property
+            
 
             if (rowValue) {
                 if (headerValue.start != "") {
