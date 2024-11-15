@@ -56,7 +56,17 @@ if os.path.exists(file):
                     pagination: "local",
                     paginationSize: 5,
                     tooltips: true,
-                    columns: [{', '.join(column_setting)}],
+                    columns: [
+                        {title:"rowid", field:"rowid", width:150, sorter:"string", hozAlign:"center", headerFilter:"input", headerFilterLiveFilter:true, editor: "input"},
+                        {title:"ref", field:"ref", width:150, sorter:"string", hozAlign:"center", headerFilter:"input", headerFilterLiveFilter:true, editor: "input"},
+                        {title:"opening", field:"opening", width:150, sorter:"string", hozAlign:"center", headerFilter:"input", headerFilterLiveFilter:true, editor: "input"},
+                        {title:"cash", field:"cash", width:150, sorter:"string", hozAlign:"center", headerFilter:"input", headerFilterLiveFilter:true, editor: "input"},
+                        {title:"card", field:"card", width:150, sorter:"string", hozAlign:"center", headerFilter:"input", headerFilterLiveFilter:true, editor: "input"},
+                        {title:"date_creation", field:"date_creation", width:150, sorter:"string", hozAlign:"center", headerFilter:"input", headerFilterLiveFilter:true, editor: "input"},
+                        {title:"posnumber", field:"posnumber", width:150, sorter:"string", hozAlign:"center", headerFilter:"input", headerFilterLiveFilter:true, editor: "input"},
+                        {title:"fk_user_valid", field:"fk_user_valid", width:150, sorter:"string", hozAlign:"center", headerFilter:"input", headerFilterLiveFilter:true, editor: "input"},
+                        {title:"tms", field:"tms", width:150, sorter:"string", hozAlign:"center", headerFilter:"input", headerFilterLiveFilter:true, editor: "input"}
+                    ],
                 }});
             </script>
         </body>
